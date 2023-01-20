@@ -6,22 +6,33 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [store, setStore] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const getStore = async () => {
       const res = await fetch(
-        "https://api.escuelajs.co/api/v1/products?offset=0&limit=6"
+        "https://api.escuelajs.co/api/v1/products?offset=1&limit=6"
       ).then((res) => res.json());
       setStore(res);
     };
     getStore();
   }, []);
 
+  useEffect(() => {
+    const getUsers = async () => {
+      const res = await fetch(
+        "https://api.escuelajs.co/api/v1/users?offset=0&limit=8"
+      ).then((res) => res.json());
+      setUsers(res);
+    };
+    getUsers();
+  }, []);
+
   return (
     <div>
       <Header />
       <Cards store={store} />
-      <Tabel />
+      <Tabel users={users} />
       <Footer />
     </div>
   );

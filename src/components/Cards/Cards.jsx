@@ -6,16 +6,17 @@ const Cards = ({ store }) => {
       <h2 className="font-medium text-8xl">Get Started</h2>
       <div className="mt-10">
         <hr className="border-[1px] border-black mb-10" />
-
-        {store.map(({ id, title, price, description, images }) => (
-          <Card
-            key={id}
-            title={title}
-            price={price}
-            description={description}
-            images={images[0]}
-          />
-        ))}
+        <div className="grid grid-cols-3 grid-rows-2 mx-auto gap-10">
+          {store.map(({ id, title, price, description, images }) => (
+            <Card
+              key={id}
+              title={title}
+              price={price}
+              description={description}
+              images={images[0]}
+            />
+          ))}
+        </div>
 
         <hr className="border-[1px] border-black mt-10" />
       </div>
