@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Card from "../Cards/Card";
 
 const Cards = ({ store }) => {
@@ -7,14 +8,16 @@ const Cards = ({ store }) => {
       <div className="mt-10">
         <hr className="border-[1px] border-black mb-10" />
         <div className="grid grid-cols-3 grid-rows-2 mx-auto gap-10">
-          {store.map(({ id, title, price, description, images }) => (
-            <Card
-              key={id}
-              title={title}
-              price={price}
-              description={description}
-              images={images[0]}
-            />
+          {store.map(({ id, title, description, price, images }) => (
+            <Link to={`/${id}`} key={id}>
+              <Card
+                key={id}
+                title={title}
+                price={price}
+                description={description}
+                images={images[0]}
+              />
+            </Link>
           ))}
         </div>
 
