@@ -7,6 +7,12 @@ function App() {
   const [cardItem, setCardItem] = useState([]);
   const [store, setStore] = useState([]);
   const [users, setUsers] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+
+  const openHandler = () => {
+    setOpenModal(!openModal);
+    console.log("click");
+  };
 
   const AddItem = () => {
     const newItem = {
@@ -40,8 +46,22 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Landing store={store} users={users} cardItem={cardItem} />} />
-      <Route path="/:id" element={<CardInfo onAddItem={AddItem} cardItem={cardItem} />} />
+      <Route
+        path="/"
+        element={
+          <Landing
+            store={store}
+            users={users}
+            cardItem={cardItem}
+            onOpen={openHandler}
+            active={openModal}
+          />
+        }
+      />
+      <Route
+        path="/:id"
+        element={<CardInfo onAddItem={AddItem} cardItem={cardItem} />}
+      />
     </Routes>
   );
 }
