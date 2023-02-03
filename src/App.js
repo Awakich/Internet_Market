@@ -7,11 +7,10 @@ function App() {
   const [cardItem, setCardItem] = useState([]);
   const [store, setStore] = useState([]);
   const [users, setUsers] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(true);
 
   const openHandler = () => {
     setOpenModal(!openModal);
-    console.log("click");
   };
 
   const AddItem = () => {
