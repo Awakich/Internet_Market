@@ -9,7 +9,7 @@ const Cards = ({ store }) => {
         <hr className="border-[1px] border-black mb-10" />
         <div className="grid grid-cols-3 grid-rows-2 mx-auto gap-10">
           {store.map(({ id, title, description, price, images }) => (
-            <Link to={`/${id}`} key={id}>
+            <Link key={id} to={`/${id}`}>
               <Card
                 key={id}
                 title={title}

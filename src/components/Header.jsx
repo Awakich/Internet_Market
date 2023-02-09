@@ -1,9 +1,9 @@
 import NavTop from "./NavTop";
 
-const Header = ({ cardItem, onOpen }) => {
+const Header = () => {
   return (
     <div className="bg-[#FFF06C] pb-10">
-      <NavTop cardItem={cardItem} onOpen={onOpen} />
+      <NavTop />
       <div className="flex items-center justify-between px-5">
         <h1 className="font-semibold text-9xl flex-1">Stuff From Anythere</h1>
         <p className="font-light text-5xl text-right">

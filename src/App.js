@@ -1,16 +1,17 @@
 import { Route, Routes } from "react-router-dom";
 import Landing from "./components/Landing";
 import CardInfo from "../src/components/Cards/CardInfo";
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
+import { Context } from "../src/context";
 
 function App() {
   const [cardItem, setCardItem] = useState([]);
   const [store, setStore] = useState([]);
   const [users, setUsers] = useState([]);
-  const [openModal, setOpenModal] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const openHandler = () => {
-    setOpenModal(!openModal);
+    setOpen(!open);
   };
 
   const AddItem = () => {
@@ -19,7 +20,6 @@ function App() {
       title: store.title,
       description: store.description,
       price: store.price,
-      images: store.images,
     };
     setCardItem([...cardItem, newItem]);
   };
@@ -43,26 +43,18 @@ function App() {
     getUsers();
   }, []);
 
+  console.log(cardItem);
+
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <Landing
-            store={store}
-            users={users}
-            cardItem={cardItem}
-            onOpen={openHandler}
-            active={openModal}
-          />
-        }
-      />
-      <Route
-        path="/:id"
-        element={<CardInfo onAddItem={AddItem} cardItem={cardItem} />}
-      />
-    </Routes>
+    <Context.Provider
+      value={{ store, users, cardItem, AddItem, open, openHandler }}
+    >
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/:id" element={<CardInfo />} />
+      </Routes>
+    </Context.Provider>
   );
 }
 
-export default App;
+export default memo(App);

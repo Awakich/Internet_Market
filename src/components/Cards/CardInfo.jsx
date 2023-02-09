@@ -1,9 +1,13 @@
 import NavTop from "../NavTop";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext, memo } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../../context";
+import Modal from "../Modal";
 
-const CardInfo = ({ onAddItem, cardItem }) => {
+const CardInfo = () => {
+  const { AddItem } = useContext(Context);
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -30,7 +34,8 @@ const CardInfo = ({ onAddItem, cardItem }) => {
 
   return (
     <div className="bg-[#FFF06C] min-h-screen">
-      <NavTop cardItem={cardItem} />
+      <Modal />
+      <NavTop />
       <button
         onClick={BackHandler}
         className="ml-10 px-5 py-2 bg-black text-white rounded-full hover:opacity-90 mb-5"
@@ -46,7 +51,7 @@ const CardInfo = ({ onAddItem, cardItem }) => {
           <p className="text-2xl font-light">{description}</p>
           <p className="font-semibold text-2xl">${price}</p>
           <button
-            onClick={onAddItem}
+            onClick={AddItem}
             className="bg-black text-white px-14 py-5 rounded-full hover:opacity-90 font-semibold text-2xl"
           >
             Add to card
@@ -57,4 +62,4 @@ const CardInfo = ({ onAddItem, cardItem }) => {
   );
 };
 
-export default CardInfo;
+export default memo(CardInfo);
