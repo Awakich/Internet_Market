@@ -14,14 +14,21 @@ function App() {
     setOpen(!open);
   };
 
-  const AddItem = () => {
-    const newItem = {
-      id: store.id,
-      title: store.title,
-      description: store.description,
-      price: store.price,
-    };
-    setCardItem([...cardItem, newItem]);
+  const AddItem = (id, { title, description, price }, image) => {
+    setCardItem((prev) => [
+      ...prev,
+      {
+        id: id,
+        title: title,
+        description: description,
+        price: price,
+        image: image,
+      },
+    ]);
+  };
+
+  const RemoveItem = (id) => {
+    setCardItem(cardItem.filter((item) => item.id !== id));
   };
 
   const getStore = async () => {
@@ -43,15 +50,13 @@ function App() {
     getUsers();
   }, []);
 
-  console.log(cardItem);
-
   return (
     <Context.Provider
-      value={{ store, users, cardItem, AddItem, open, openHandler }}
+      value={{ store, users, cardItem, open, openHandler, RemoveItem }}
     >
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/:id" element={<CardInfo />} />
+        <Route path="/:id" element={<CardInfo AddItem={AddItem} />} />
       </Routes>
     </Context.Provider>
   );

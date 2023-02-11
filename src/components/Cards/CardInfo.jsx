@@ -1,13 +1,10 @@
 import NavTop from "../NavTop";
-import { useState, useEffect, useContext, memo } from "react";
+import { useState, useEffect, memo } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Context } from "../../context";
-import Modal from "../Modal";
+import Modal from "../Modal/Modal";
 
-const CardInfo = () => {
-  const { AddItem } = useContext(Context);
-
+const CardInfo = ({ AddItem }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -51,7 +48,7 @@ const CardInfo = () => {
           <p className="text-2xl font-light">{description}</p>
           <p className="font-semibold text-2xl">${price}</p>
           <button
-            onClick={AddItem}
+            onClick={() => AddItem(id, info, image)}
             className="bg-black text-white px-14 py-5 rounded-full hover:opacity-90 font-semibold text-2xl"
           >
             Add to card

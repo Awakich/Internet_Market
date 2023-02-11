@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import Cards from "../components/Cards/Cards";
 import Footer from "../components/Footer";
 import Tabel from "../components/Table/Table";
-import Modal from "../components/Modal";
+import Modal from "./Modal/Modal";
 import { Context } from "../context";
 import { useContext } from "react";
 
